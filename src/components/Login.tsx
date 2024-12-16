@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
-import Header from './Header.tsx';
-import { checkValidateData } from '../utils/validate.ts';
+import { useState, useRef } from 'react';
+import Header from './Header';
+import backgroundImage from '../assets/background.jpg';
+import { checkValidateData } from '../utils/validate';
 
 type Props = {};
 
@@ -33,10 +34,7 @@ const Login = (props: Props) => {
     <div className='bg-black bg-opacity-80'>
       <Header />
       <div className='absolute'>
-        <img
-          src='https://assets.nflxext.com/ffe/siteui/vlv3/03ad76d1-e184-4d99-ae7d-708672fa1ac2/web/NP-en-20241111-TRIFECTA-perspective_bf5889d0-60a0-48cd-ab7a-cd61c9650f89_large.jpg'
-          alt='logo'
-        />
+        <img src={backgroundImage} alt='logo' />
       </div>
       <form
         className='absolute left-0 right-0 w-3/12 px-12 py-16 mx-auto text-white bg-black rounded-sm bg-opacity-80 top-1/4'
