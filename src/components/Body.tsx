@@ -1,6 +1,6 @@
 import React from 'react';
-import Login from './Login.tsx';
-import Browse from './Browse.tsx';
+import Login from './Login';
+import Browse from './Browse';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 type Props = {};
