@@ -1,9 +1,12 @@
-import React from 'react';
-import './App.css';
-import Body from './components/Body';
+import { RouterProvider } from 'react-router-dom';
+import router from './app/router/router';
 
 function App() {
-  return <Body />;
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;
