@@ -28,7 +28,10 @@ const Login = (props: Props) => {
         className='absolute left-0 right-0 w-3/12 px-12 py-16 mx-auto text-white bg-black rounded-sm bg-opacity-80 top-1/4'
         onSubmit={(e) => e.preventDefault()}
       >
-        <h1 className='py-4 text-3xl font-bold'>
+        <h1
+          className='py-4 text-3xl font-bold'
+          data-testid={`${isSignIn ? 'Sign-In' : 'Sign-Up'}`}
+        >
           {isSignIn ? 'Sign In' : 'Sign Up'}
         </h1>
         {!isSignIn && (
@@ -51,7 +54,12 @@ const Login = (props: Props) => {
           placeholder='Password'
           className='w-full p-4 my-4 bg-gray-600'
         />
-        <p className='py-2 text-lg font-bold text-red-600'>{errorMessage}</p>
+        <p
+          className='py-2 text-lg font-bold text-red-600'
+          data-testid='error-message'
+        >
+          {errorMessage}
+        </p>
         <button
           className='w-full p-4 my-6 bg-red-600 rounded-lg'
           onClick={handleFormSubmit}
