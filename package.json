@@ -37,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
     "react-router-dom": "^6.28.0",
