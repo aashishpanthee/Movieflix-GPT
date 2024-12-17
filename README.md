@@ -8,6 +8,8 @@
 - Sign up Form
 - Form Validation
 - useRef Hook
+- Firebase Setup
+- Deploying our app to production
 
 # Features
 
@@ -28,3 +30,10 @@
 - MovieFlix GPT
   - Search-bar
   - Movie Suggestions
+
+# Deployment in Firebase
+
+- Steps:
+  - firebase login
+  - firebase init
+  - firebase deploy
