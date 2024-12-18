@@ -10,6 +10,10 @@
 - useRef Hook
 - Firebase Setup
 - Deploying our app to production
+- Create Signup user account
+- Implement Sign in user api
+- Created Redux Store with auth slice
+- Stored user email & password in Firebase database & redux store
 
 # Features
 
@@ -25,7 +29,7 @@
     - Trailor in background
     - Movie title & description
     - Movie Suggestions
-      - MovieLists \* N
+      - MovieLists
 
 - MovieFlix GPT
   - Search-bar
