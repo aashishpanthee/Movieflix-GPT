@@ -1,14 +1,26 @@
 import { RouterProvider } from 'react-router-dom';
 import router from './app/router/router';
-import { Provider } from 'react-redux';
-import { store } from './app/redux/store';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './app/firebase/firebase';
+import { addUser, removeUser } from './app/redux/auth/authSlice';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName } = user;
+        dispatch(addUser({ uid, email, displayName }));
+      } else {
+        dispatch(removeUser());
+      }
+    });
+  }, [dispatch]);
   return (
     <>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
+      <RouterProvider router={router} />
     </>
   );
 }
