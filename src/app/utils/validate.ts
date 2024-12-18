@@ -1,10 +1,9 @@
-export const checkValidateData = (
+export const validateUserCredentials = (
   email: string,
   password: string,
-  name: string = '',
+  name: string | undefined,
   isSignIn?: boolean
 ) => {
-  // Validate name only if it's Sign Up
   if (!isSignIn && !name) {
     return 'Name must contain at least 5 characters';
   }
