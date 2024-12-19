@@ -4,19 +4,30 @@ import { signInUser, signUpUser, updateAuthProfile } from '../../../utils/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../../../redux/auth/authSlice';
+import { AppDispatch } from '../../../redux/store';
+
+type useLoginFormReturnType = {
+  isSignIn: boolean;
+  email: React.RefObject<HTMLInputElement | null>;
+  password: React.RefObject<HTMLInputElement | null>;
+  name: React.RefObject<HTMLInputElement | null>;
+  errorMessage: string | null;
+  toggleSignInForm: () => void;
+  handleFormSubmit: () => Promise<void>;
+};
 
 /**
  *
  * @returns all the form data & states & functions related to login/signup form
  */
-export const useLoginForm = () => {
+export const useLoginForm = (): useLoginFormReturnType => {
   const [isSignIn, setIsSignIn] = useState<boolean>(true);
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
   const name = useRef<HTMLInputElement>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   /**
    *
@@ -69,18 +80,20 @@ export const useLoginForm = () => {
           return;
         } else {
           // update user profile for displayname
-          const updatedUserObject = await updateAuthProfile(
-            signedUpUser,
-            nameValue
-          );
-          if (updatedUserObject?.error) {
-            setErrorMessage(updatedUserObject?.error);
-            return;
-          } else {
-            const { email, uid, displayName } =
-              updatedUserObject?.updatedUser || {};
-            dispatch(addUser({ uid, email, displayName }));
-            navigate('/browse');
+          if (signedUpUser !== null) {
+            const updatedUserObject = await updateAuthProfile(
+              signedUpUser,
+              nameValue
+            );
+            if (updatedUserObject?.error) {
+              setErrorMessage(updatedUserObject?.error);
+              return;
+            } else {
+              const { email, uid, displayName } =
+                updatedUserObject?.updatedUser || {};
+              dispatch(addUser({ email, uid, displayName }));
+              navigate('/browse');
+            }
           }
         }
       }

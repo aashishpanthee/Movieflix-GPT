@@ -5,7 +5,24 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import { auth } from '../firebase/firebase';
-export const signInUser = async (email: string, password: string) => {
+import {
+  SignInUser,
+  SignOutUser,
+  SignUpUser,
+  UpdateAuthProfile,
+} from '../types/auth.types';
+
+export const signOutUser: SignOutUser = async () => {
+  try {
+    await signOut(auth);
+    return { status: 'Signout successfull' };
+  } catch (error: any) {
+    console.log(error.message);
+    return { status: "Couldn't signout, please try again" };
+  }
+};
+
+export const signInUser: SignInUser = async (email, password) => {
   try {
     const userCredential = await signInWithEmailAndPassword(
       auth,
@@ -18,11 +35,11 @@ export const signInUser = async (email: string, password: string) => {
     if (errorMessage.includes('auth/invalid-credential')) {
       errorMessage = 'Invalid Credentials';
     }
-    return { user: null, error: errorMessage };
+    return { signedInUser: null, error: errorMessage };
   }
 };
 
-export const signUpUser = async (email: string, password: string) => {
+export const signUpUser: SignUpUser = async (email, password) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
@@ -35,23 +52,13 @@ export const signUpUser = async (email: string, password: string) => {
     if (errorMessage.includes('email-already')) {
       errorMessage = 'Email already exists';
     }
-    return { user: null, error: errorMessage };
+    return { signedUpUser: null, error: errorMessage };
   }
 };
 
-export const signOutUser = async () => {
-  try {
-    await signOut(auth);
-    return { status: 'Signout successfull' };
-  } catch (error: any) {
-    console.log(error.message);
-    return { status: "Couldn't signout, please try again" };
-  }
-};
-
-export const updateAuthProfile = async (
-  signedUpUser: any,
-  nameValue: string = ''
+export const updateAuthProfile: UpdateAuthProfile = async (
+  signedUpUser,
+  nameValue = ''
 ) => {
   try {
     if (auth.currentUser) {
@@ -60,6 +67,7 @@ export const updateAuthProfile = async (
       });
       return { updatedUser: auth.currentUser, error: null };
     }
+    return { updatedUser: null, error: 'No current user' };
   } catch (error: any) {
     let errorMessage = error.message;
     return { updatedUser: null, error: errorMessage };
