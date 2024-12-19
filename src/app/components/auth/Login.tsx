@@ -1,9 +1,10 @@
+import { JSX } from 'react';
 import Header from '../../components/Header';
 import { useLoginForm } from './hooks/useLoginForm';
 
 type Props = {};
 
-const Login = (props: Props) => {
+const Login = (props: Props): JSX.Element => {
   const {
     isSignIn,
     errorMessage,

@@ -1,11 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { AuthUser } from '../../types/auth.types';
 
 type authInitialState = {
-  user: null | {
-    uid: string;
-    email: string;
-    displayName: string;
-  };
+  user: AuthUser | null;
 };
 let initialState: authInitialState = {
   user: null,
