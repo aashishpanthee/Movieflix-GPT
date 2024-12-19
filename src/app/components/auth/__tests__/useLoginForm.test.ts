@@ -1,5 +1,14 @@
-import { renderHook, act } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-hooks';
 import { useLoginForm } from '../hooks/useLoginForm';
+import { act } from 'react';
+
+jest.mock('react-router-dom', () => ({
+  useNavigate: jest.fn(() => jest.fn()),
+}));
+
+jest.mock('react-redux', () => ({
+  useDispatch: jest.fn(),
+}));
 
 describe('useLoginForm', () => {
   it('should initialize with default values', () => {
@@ -20,6 +29,21 @@ describe('useLoginForm', () => {
     expect(result.current.errorMessage).toBeNull();
   });
 
+  it('should clear error message when toggling form', () => {
+    const { result } = renderHook(() => useLoginForm());
+
+    // Set an initial error
+    act(() => {
+      result.current.handleFormSubmit();
+    });
+
+    act(() => {
+      result.current.toggleSignInForm();
+    });
+
+    expect(result.current.errorMessage).toBeNull();
+  });
+
   it('should handle form validation errors', () => {
     const { result } = renderHook(() => useLoginForm());
 
@@ -34,20 +58,5 @@ describe('useLoginForm', () => {
     });
 
     expect(result.current.errorMessage).not.toBeNull();
-  });
-
-  it('should clear error message when toggling form', () => {
-    const { result } = renderHook(() => useLoginForm());
-
-    // Set an initial error
-    act(() => {
-      result.current.handleFormSubmit();
-    });
-
-    act(() => {
-      result.current.toggleSignInForm();
-    });
-
-    expect(result.current.errorMessage).toBeNull();
   });
 });
