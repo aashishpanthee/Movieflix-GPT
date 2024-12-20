@@ -1,6 +1,7 @@
 import { JSX } from 'react';
 import Header from '../../components/Header';
 import { useLoginForm } from './hooks/useLoginForm';
+import { LOGIN_BG } from '../../utils/constants';
 
 type Props = {};
 
@@ -20,7 +21,7 @@ const Login = (props: Props): JSX.Element => {
       <Header />
       <div className='absolute w-full'>
         <img
-          src='/assets/background.jpg'
+          src={LOGIN_BG}
           alt='logo'
           className='object-cover w-full h-screen'
         />
