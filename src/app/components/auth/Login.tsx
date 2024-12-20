@@ -1,5 +1,5 @@
 import { JSX } from 'react';
-import Header from '../../components/Header';
+import Header from '../common/Header';
 import { useLoginForm } from './hooks/useLoginForm';
 import { LOGIN_BG } from '../../utils/constants';
 

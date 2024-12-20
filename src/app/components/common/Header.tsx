@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { onAuthStateChanged } from 'firebase/auth';
-import { AppDispatch, RootState } from '../redux/store';
-import { addUser, removeUser } from '../redux/auth/authSlice';
-import { auth } from '../firebase/firebase';
-import { signOutUser } from '../utils/auth';
-import { USER_ICON, HEADER_LOGO } from '../utils/constants';
+import { AppDispatch, RootState } from '../../redux/store';
+import { addUser, removeUser } from '../../redux/auth/authSlice';
+import { auth } from '../../firebase/firebase';
+import { signOutUser } from '../../utils/auth';
+import { USER_ICON, HEADER_LOGO } from '../../utils/constants';
 
 type Props = {};
 
