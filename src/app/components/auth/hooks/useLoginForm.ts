@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react';
 import { validateUserCredentials } from '../../../utils/validate';
 import { signInUser, signUpUser, updateAuthProfile } from '../../../utils/auth';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../../../redux/auth/authSlice';
 import { AppDispatch } from '../../../redux/store';
@@ -26,7 +25,6 @@ export const useLoginForm = (): useLoginFormReturnType => {
   const password = useRef<HTMLInputElement>(null);
   const name = useRef<HTMLInputElement>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
   /**
@@ -66,9 +64,8 @@ export const useLoginForm = (): useLoginFormReturnType => {
         if (error) {
           setErrorMessage(error);
           return;
-        } else {
-          navigate('/browse');
         }
+        // navigating to browse page is handled in Header Component by Firebase onAuthStateChanged listener
       } else {
         // sign up user
         const { signedUpUser, error } = await signUpUser(
@@ -92,7 +89,7 @@ export const useLoginForm = (): useLoginFormReturnType => {
               const { email, uid, displayName } =
                 updatedUserObject?.updatedUser || {};
               dispatch(addUser({ email, uid, displayName }));
-              navigate('/browse');
+              // navigating to browse page is handled in Header Component by Firebase onAuthStateChanged listener
             }
           }
         }
