@@ -25,10 +25,6 @@ export const useNowPlayingMovies = () => {
     dispatch(addNowPlayingMovie(nowPlayingMoviesResponse.data.results));
   };
 
-  if (!nowPlayingMovies) {
-    return null;
-  }
-
   return nowPlayingMovies;
 };
 export default useNowPlayingMovies;
