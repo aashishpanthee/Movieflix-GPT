@@ -14,6 +14,16 @@
 - Implement Sign in user api
 - Created Redux Store with auth slice
 - Stored user email & password in Firebase database & redux store
+- BugFix: Sign up user display name and profile picture
+- BugFix: If the user is not logged in, the user should be redirected to login page & if logged in, should be able to access the browse page
+- Register TMDB API & create an app & get access token
+- Get data from TMDB now playing movies list API
+- Custom hook for Now Playing Movies
+- Create movieSlice
+- Update store with movies data
+- Fetch data for trailer video
+- Updated store with Trailer video data
+- Embedded the youtube video & make it autoplay and mute
 
 # Features
 

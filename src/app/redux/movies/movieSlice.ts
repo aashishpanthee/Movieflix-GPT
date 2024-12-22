@@ -1,12 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NOW_PLAYING_MOVIE } from '../../types/movie.types';
+import {
+  NOW_PLAYING_MOVIE,
+  NOW_PLAYING_MOVIE_TRAILER,
+} from '../../types/movie.types';
 
 type movieInitialnitialState = {
   nowPlayingMovies: NOW_PLAYING_MOVIE[] | null;
+  nowPlayingMovieTrailer: NOW_PLAYING_MOVIE_TRAILER | null;
 };
 
 let initialState: movieInitialnitialState = {
   nowPlayingMovies: null,
+  nowPlayingMovieTrailer: null,
 };
 
 export const movieSlice = createSlice({
@@ -16,7 +21,11 @@ export const movieSlice = createSlice({
     addNowPlayingMovie: (state, action) => {
       state.nowPlayingMovies = action.payload;
     },
+    addNowPlayingMovieTrailer: (state, action) => {
+      state.nowPlayingMovieTrailer = action.payload;
+    },
   },
 });
-export const { addNowPlayingMovie } = movieSlice.actions;
+export const { addNowPlayingMovie, addNowPlayingMovieTrailer } =
+  movieSlice.actions;
 export default movieSlice.reducer;

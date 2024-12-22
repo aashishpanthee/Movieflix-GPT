@@ -28,4 +28,18 @@ export type NOW_PLAYING_MOVIE_RESPONSE = {
   total_results: number;
 };
 
+export type NOW_PLAYING_MOVIE_TRAILER = {
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  key: string;
+  name: string;
+  official: boolean;
+  published_at: string;
+  site: string;
+  size: number;
+  type: string;
+};
+
 export type getNowPlayingMovies = () => Promise<void>;
+export type getNowPlayingMovieTrailer = () => Promise<void>;
