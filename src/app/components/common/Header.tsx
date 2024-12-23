@@ -14,6 +14,7 @@ import {
 } from '../../utils/constants';
 import { toggleGptSearchView } from '../../redux/gpt/gptSlice';
 import { changeLanguage } from '../../redux/config/configSlice';
+import Button from './Button';
 
 type Props = {};
 
@@ -67,22 +68,22 @@ const Header = (props: Props) => {
               ))}
             </select>
           )}
-          <button
+          <Button
             className='px-4 py-2 mx-4 my-2 text-white bg-purple-800 rounded-md'
             onClick={handleGptSearchView}
           >
             {showGptSearch
               ? HeaderComponentText.BROWSE_PAGE_BUTTON_TEXT
               : HeaderComponentText.GPT_PAGE_BUTTON_TEXT}
-          </button>
+          </Button>
           <img src={USER_ICON} alt='' className='w-12 h-12' />
           <p className='text-lg text-white'>{user.displayName}</p>
-          <button
+          <Button
             className='px-4 py-2 text-white bg-gray-700 rounded-md focus:outline-none'
             onClick={handleSignOut}
           >
             {HeaderComponentText.LOGOUT_TEXT}
-          </button>
+          </Button>
         </div>
       )}
     </div>
