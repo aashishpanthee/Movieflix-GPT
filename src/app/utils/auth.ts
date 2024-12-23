@@ -17,7 +17,6 @@ export const signOutUser: SignOutUser = async () => {
     await signOut(auth);
     return { status: 'Signout successfull' };
   } catch (error: any) {
-    console.log(error.message);
     return { status: "Couldn't signout, please try again" };
   }
 };

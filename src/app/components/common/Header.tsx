@@ -42,8 +42,6 @@ const Header = (props: Props) => {
     const { status } = await signOutUser();
     if (status === 'Signout successfull') {
       // navigating to login page is handled by Firebase onAuthStateChanged listener which is above in useEffect.
-    } else {
-      console.log(status);
     }
   };
   const handleGptSearchView = () => {
