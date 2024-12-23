@@ -5,6 +5,7 @@ import { addNowPlayingMovie } from '../../../redux/movies/movieSlice';
 import axiosInstance from '../../../config/axios/axios.config';
 import {
   getNowPlayingMovies,
+  MOVIE,
   NOW_PLAYING_MOVIE_RESPONSE,
 } from '../../../types/movie.types';
 
@@ -18,13 +19,13 @@ export const useNowPlayingMovies = () => {
   const { nowPlayingMovies } = useSelector((store: RootState) => store.movies);
 
   const getNowPlayingMovies: getNowPlayingMovies = async () => {
-    const nowPlayingMoviesResponse =
-      await axiosInstance.get<NOW_PLAYING_MOVIE_RESPONSE>(
-        '/now_playing?page=1'
-      );
-    dispatch(addNowPlayingMovie(nowPlayingMoviesResponse.data.results));
+    const response = await axiosInstance.get<NOW_PLAYING_MOVIE_RESPONSE>(
+      '/now_playing?page=1'
+    );
+    const nowPlayingMoviesResponse: NOW_PLAYING_MOVIE_RESPONSE = response.data;
+    const nowPlayingMovies: MOVIE[] = nowPlayingMoviesResponse.results;
+    dispatch(addNowPlayingMovie(nowPlayingMovies));
   };
-
   return nowPlayingMovies;
 };
 export default useNowPlayingMovies;
