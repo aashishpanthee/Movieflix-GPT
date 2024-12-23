@@ -9,6 +9,8 @@ const SecondaryContainer = (props: Props) => {
   const { popularMovies } = useSelector((store: RootState) => store.movies);
   const { topRatedMovies } = useSelector((store: RootState) => store.movies);
   const { upComingMovies } = useSelector((store: RootState) => store.movies);
+  if (!nowPlayingMovies && !popularMovies && !topRatedMovies && !upComingMovies)
+    return null;
   return (
     <div className='bg-black '>
       <div className=' z-20 -mt-[10%] relative pl-12'>
