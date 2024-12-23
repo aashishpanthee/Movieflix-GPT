@@ -1,4 +1,4 @@
-export type NOW_PLAYING_MOVIE = {
+export type MOVIE = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -20,14 +20,6 @@ export type DATES = {
   minimum: string;
 };
 
-export type NOW_PLAYING_MOVIE_RESPONSE = {
-  dates: DATES;
-  pages: number;
-  results: NOW_PLAYING_MOVIE[];
-  total_pages: number;
-  total_results: number;
-};
-
 export type NOW_PLAYING_MOVIE_TRAILER = {
   id: string;
   iso_639_1: string;
@@ -41,5 +33,38 @@ export type NOW_PLAYING_MOVIE_TRAILER = {
   type: string;
 };
 
+export type NOW_PLAYING_MOVIE_RESPONSE = {
+  dates: DATES;
+  page: number;
+  results: MOVIE[];
+  total_pages: number;
+  total_results: number;
+};
+
+export type POPULAR_MOVIE_RESPONSE = {
+  page: number;
+  results: MOVIE[];
+  total_pages: number;
+  total_results: number;
+};
+
+export type TOP_RATED_MOVIE_RESPONSE = {
+  page: number;
+  results: MOVIE[];
+  total_pages: number;
+  total_results: number;
+};
+
+export type UPCOMING_MOVIE_RESPONSE = {
+  dates: DATES;
+  page: number;
+  results: MOVIE[];
+  total_pages: number;
+  total_results: number;
+};
+
 export type getNowPlayingMovies = () => Promise<void>;
 export type getNowPlayingMovieTrailer = () => Promise<void>;
+export type getPopularMovies = () => Promise<void>;
+export type getTopRatedMovies = () => Promise<void>;
+export type getUpcomingMovies = () => Promise<void>;
