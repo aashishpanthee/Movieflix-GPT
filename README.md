@@ -24,6 +24,13 @@
 - Fetch data for trailer video
 - Updated store with Trailer video data
 - Embedded the youtube video & make it autoplay and mute
+- Build Secondary Container
+- Build Movie List
+- Build Movie Card
+- custom hook for all the movie types
+- GPT Search Page
+- GPT Search Bar
+- Multi-language feature in GPT Search Page
 
 # Features
 
