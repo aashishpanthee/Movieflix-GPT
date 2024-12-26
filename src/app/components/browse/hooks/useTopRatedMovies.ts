@@ -20,7 +20,7 @@ export const useTopRatedMovies = () => {
 
   const getTopRatedMovies: getTopRatedMovies = async () => {
     const response = await axiosInstance.get<TOP_RATED_MOVIE_RESPONSE>(
-      '/top_rated?page=1'
+      '/movie/top_rated?page=1'
     );
     const topRatedMoviesResponse: TOP_RATED_MOVIE_RESPONSE = response.data;
     const topRatedMovies: MOVIE[] = topRatedMoviesResponse.results;

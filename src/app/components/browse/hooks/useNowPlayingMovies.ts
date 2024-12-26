@@ -20,7 +20,7 @@ export const useNowPlayingMovies = () => {
 
   const getNowPlayingMovies: getNowPlayingMovies = async () => {
     const response = await axiosInstance.get<NOW_PLAYING_MOVIE_RESPONSE>(
-      '/now_playing?page=1'
+      '/movie/now_playing?page=1'
     );
     const nowPlayingMoviesResponse: NOW_PLAYING_MOVIE_RESPONSE = response.data;
     const nowPlayingMovies: MOVIE[] = nowPlayingMoviesResponse.results;

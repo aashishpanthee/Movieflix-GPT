@@ -23,7 +23,7 @@ export const useUpcomingMovies = () => {
 
   const getUpcomingMovies: getUpcomingMovies = async () => {
     const response = await axiosInstance.get<UPCOMING_MOVIE_RESPONSE>(
-      '/upcoming?page=1'
+      '/movie/upcoming?page=1'
     );
     const upComingMoviesResponse: UPCOMING_MOVIE_RESPONSE = response.data;
     const upComingMovies: MOVIE[] = upComingMoviesResponse.results;

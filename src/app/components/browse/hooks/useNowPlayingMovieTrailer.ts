@@ -21,7 +21,7 @@ export const useNowPlayingMovieTrailer = (movieId: number) => {
 
   const getNowPlayingMovieTrailer: getNowPlayingMovieTrailer = async () => {
     const nowPlayingMovieDetail = await axiosInstance.get(
-      `/${movieId}/videos?language=en-US`
+      `/movie/${movieId}/videos?language=en-US`
     );
     const nowPlayingMovieDetailResult: NOW_PLAYING_MOVIE_TRAILER[] =
       nowPlayingMovieDetail.data.results;

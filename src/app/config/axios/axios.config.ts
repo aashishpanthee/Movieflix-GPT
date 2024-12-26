@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 import { CONFIG } from '../index.config';
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: 'https://api.themoviedb.org/3/movie',
+  baseURL: 'https://api.themoviedb.org/3',
   headers: CONFIG.tmdbApiConfig.headers,
 });
 

@@ -20,7 +20,7 @@ export const usePopularMovies = () => {
 
   const getPopularMovies: getPopularMovies = async () => {
     const response = await axiosInstance.get<POPULAR_MOVIE_RESPONSE>(
-      '/popular?page=1'
+      '/movie/popular?page=1'
     );
     const popularMoviesResponse: POPULAR_MOVIE_RESPONSE = response.data;
     const popularMovies: MOVIE[] = popularMoviesResponse.results;
