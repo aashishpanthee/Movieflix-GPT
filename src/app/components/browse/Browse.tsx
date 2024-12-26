@@ -12,10 +12,10 @@ import { RootState } from '../../redux/store';
 type Props = {};
 
 const Browse = (props: Props) => {
-  const nowPlayingMovies = useNowPlayingMovies();
-  const popularMovies = usePopularMovies();
-  const topRatedMovies = useTopRatedMovies();
-  const upComingMovies = useUpcomingMovies();
+  useNowPlayingMovies();
+  usePopularMovies();
+  useTopRatedMovies();
+  useUpcomingMovies();
   const { showGptSearch } = useSelector((store: RootState) => store.gpt);
   return (
     <div>

@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../redux/store';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../redux/store';
 import {
-  addPopularMovies,
   addUpComingMovies,
+  clearErrorOfMovies,
+  errorStateOfUpComingMovies,
 } from '../../../redux/movies/movieSlice';
 import axiosInstance from '../../../config/axios/axios.config';
 import {
@@ -11,15 +12,10 @@ import {
   MOVIE,
   UPCOMING_MOVIE_RESPONSE,
 } from '../../../types/movie.types';
+import { useQuery } from '@tanstack/react-query';
 
 export const useUpcomingMovies = () => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const { upComingMovies } = useSelector((store: RootState) => store.movies);
-
-  useEffect(() => {
-    !upComingMovies && getUpcomingMovies();
-  }, []);
 
   const getUpcomingMovies: getUpcomingMovies = async () => {
     const response = await axiosInstance.get<UPCOMING_MOVIE_RESPONSE>(
@@ -27,9 +23,23 @@ export const useUpcomingMovies = () => {
     );
     const upComingMoviesResponse: UPCOMING_MOVIE_RESPONSE = response.data;
     const upComingMovies: MOVIE[] = upComingMoviesResponse.results;
-    dispatch(addUpComingMovies(upComingMovies));
+    return upComingMovies;
   };
 
-  return upComingMovies;
+  const { data, error } = useQuery({
+    queryKey: ['upcoming-movies'],
+    queryFn: getUpcomingMovies,
+    staleTime: 1000 * 60 * 3, // Data is considered fresh for 3 minutes
+  });
+
+  useEffect(() => {
+    if (data) {
+      dispatch(addUpComingMovies(data));
+      dispatch(clearErrorOfMovies());
+    }
+    if (error) {
+      dispatch(errorStateOfUpComingMovies(error?.message));
+    }
+  }, [data, error]);
 };
 export default useUpcomingMovies;

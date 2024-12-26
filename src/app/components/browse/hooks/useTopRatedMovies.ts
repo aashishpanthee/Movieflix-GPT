@@ -1,22 +1,21 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../redux/store';
-import { addtopRatedMovies } from '../../../redux/movies/movieSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../redux/store';
+import {
+  addtopRatedMovies,
+  clearErrorOfMovies,
+  errorStateOfTopRatedMovies,
+} from '../../../redux/movies/movieSlice';
 import axiosInstance from '../../../config/axios/axios.config';
 import {
   getTopRatedMovies,
   MOVIE,
   TOP_RATED_MOVIE_RESPONSE,
 } from '../../../types/movie.types';
+import { useQuery } from '@tanstack/react-query';
 
 export const useTopRatedMovies = () => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const { topRatedMovies } = useSelector((store: RootState) => store.movies);
-
-  useEffect(() => {
-    !topRatedMovies && getTopRatedMovies();
-  }, []);
 
   const getTopRatedMovies: getTopRatedMovies = async () => {
     const response = await axiosInstance.get<TOP_RATED_MOVIE_RESPONSE>(
@@ -24,9 +23,24 @@ export const useTopRatedMovies = () => {
     );
     const topRatedMoviesResponse: TOP_RATED_MOVIE_RESPONSE = response.data;
     const topRatedMovies: MOVIE[] = topRatedMoviesResponse.results;
-    dispatch(addtopRatedMovies(topRatedMovies));
+    return topRatedMovies;
   };
 
-  return topRatedMovies;
+  const { data, error } = useQuery({
+    queryKey: ['top-rated-movies'],
+    queryFn: getTopRatedMovies,
+    staleTime: 1000 * 60 * 3, // Data is considered fresh for 3 minutes
+  });
+
+  useEffect(() => {
+    if (data) {
+      dispatch(addtopRatedMovies(data));
+      dispatch(clearErrorOfMovies());
+    }
+    if (error) {
+      dispatch(errorStateOfTopRatedMovies(error?.message));
+    }
+  }, [data, error]);
 };
+
 export default useTopRatedMovies;
