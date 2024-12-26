@@ -1,22 +1,21 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../redux/store';
-import { addPopularMovies } from '../../../redux/movies/movieSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../redux/store';
+import {
+  addPopularMovies,
+  clearErrorOfMovies,
+  errorStateOfPopularMovies,
+} from '../../../redux/movies/movieSlice';
 import axiosInstance from '../../../config/axios/axios.config';
 import {
   getPopularMovies,
   MOVIE,
   POPULAR_MOVIE_RESPONSE,
 } from '../../../types/movie.types';
+import { useQuery } from '@tanstack/react-query';
 
 export const usePopularMovies = () => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const { popularMovies } = useSelector((store: RootState) => store.movies);
-
-  useEffect(() => {
-    !popularMovies && getPopularMovies();
-  }, []);
 
   const getPopularMovies: getPopularMovies = async () => {
     const response = await axiosInstance.get<POPULAR_MOVIE_RESPONSE>(
@@ -24,9 +23,24 @@ export const usePopularMovies = () => {
     );
     const popularMoviesResponse: POPULAR_MOVIE_RESPONSE = response.data;
     const popularMovies: MOVIE[] = popularMoviesResponse.results;
-    dispatch(addPopularMovies(popularMovies));
+    return popularMovies;
   };
 
-  return popularMovies;
+  const { data, error } = useQuery({
+    queryKey: ['popular-movies'],
+    queryFn: getPopularMovies,
+    staleTime: 1000 * 60 * 3, // Data is considered fresh for 3 minutes
+  });
+
+  useEffect(() => {
+    if (data) {
+      dispatch(addPopularMovies(data));
+      dispatch(clearErrorOfMovies());
+    }
+    if (error) {
+      dispatch(errorStateOfPopularMovies(error?.message));
+      console.log(error);
+    }
+  }, [data, error]);
 };
 export default usePopularMovies;

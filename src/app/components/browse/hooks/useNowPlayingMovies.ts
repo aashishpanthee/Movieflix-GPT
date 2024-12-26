@@ -1,22 +1,21 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../redux/store';
-import { addNowPlayingMovie } from '../../../redux/movies/movieSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../redux/store';
+import {
+  addNowPlayingMovie,
+  clearErrorOfMovies,
+  errorStateOfNowPlayingMovies,
+} from '../../../redux/movies/movieSlice';
 import axiosInstance from '../../../config/axios/axios.config';
 import {
   getNowPlayingMovies,
   MOVIE,
   NOW_PLAYING_MOVIE_RESPONSE,
 } from '../../../types/movie.types';
+import { useQuery } from '@tanstack/react-query';
 
 export const useNowPlayingMovies = () => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const { nowPlayingMovies } = useSelector((store: RootState) => store.movies);
-
-  useEffect(() => {
-    !nowPlayingMovies && getNowPlayingMovies();
-  }, []);
 
   const getNowPlayingMovies: getNowPlayingMovies = async () => {
     const response = await axiosInstance.get<NOW_PLAYING_MOVIE_RESPONSE>(
@@ -24,8 +23,22 @@ export const useNowPlayingMovies = () => {
     );
     const nowPlayingMoviesResponse: NOW_PLAYING_MOVIE_RESPONSE = response.data;
     const nowPlayingMovies: MOVIE[] = nowPlayingMoviesResponse.results;
-    dispatch(addNowPlayingMovie(nowPlayingMovies));
+    return nowPlayingMovies;
   };
-  return nowPlayingMovies;
+
+  const { data, error } = useQuery({
+    queryKey: ['now-playing-movies'],
+    queryFn: getNowPlayingMovies,
+    staleTime: 1000 * 60 * 3, // Data is considered fresh for 3 minutes
+  });
+
+  useEffect(() => {
+    if (data) {
+      dispatch(addNowPlayingMovie(data));
+      dispatch(clearErrorOfMovies());
+    } else {
+      dispatch(errorStateOfNowPlayingMovies(error?.message));
+    }
+  }, [data, error]);
 };
 export default useNowPlayingMovies;

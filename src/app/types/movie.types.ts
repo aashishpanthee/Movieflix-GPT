@@ -87,8 +87,9 @@ export type SearchedMoviesFromTMDB = {
   vote_count: number;
 };
 
-export type getNowPlayingMovies = () => Promise<void>;
-export type getNowPlayingMovieTrailer = () => Promise<void>;
-export type getPopularMovies = () => Promise<void>;
-export type getTopRatedMovies = () => Promise<void>;
-export type getUpcomingMovies = () => Promise<void>;
+export type getNowPlayingMovies = () => Promise<MOVIE[]>;
+export type getNowPlayingMovieTrailer =
+  () => Promise<NOW_PLAYING_MOVIE_TRAILER>;
+export type getPopularMovies = () => Promise<MOVIE[]>;
+export type getTopRatedMovies = () => Promise<MOVIE[]>;
+export type getUpcomingMovies = () => Promise<MOVIE[]>;

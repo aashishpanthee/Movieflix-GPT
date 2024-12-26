@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
+    "@tanstack/react-query": "^5.62.10",
+    "@tanstack/react-query-devtools": "^5.62.10",
     "axios": "^1.7.9",
     "firebase": "^11.1.0",
     "openai": "^4.77.0",
@@ -31,6 +33,7 @@
     ]
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.62.9",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
     "react-router-dom": "^6.28.0",

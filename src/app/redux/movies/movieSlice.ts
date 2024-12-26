@@ -7,6 +7,11 @@ type movieInitialnitialState = {
   popularMovies: MOVIE[] | null;
   topRatedMovies: MOVIE[] | null;
   upComingMovies: MOVIE[] | null;
+  nowPlayingMoviesError: string | undefined;
+  popularMoviesError: string | undefined;
+  topRatedMoviesError: string | undefined;
+  upComingMoviesError: string | undefined;
+  nowPlayingMovieTrailerError: string | undefined;
 };
 
 let initialState: movieInitialnitialState = {
@@ -15,6 +20,11 @@ let initialState: movieInitialnitialState = {
   popularMovies: null,
   topRatedMovies: null,
   upComingMovies: null,
+  nowPlayingMoviesError: undefined,
+  popularMoviesError: undefined,
+  topRatedMoviesError: undefined,
+  upComingMoviesError: undefined,
+  nowPlayingMovieTrailerError: undefined,
 };
 
 export const movieSlice = createSlice({
@@ -36,6 +46,30 @@ export const movieSlice = createSlice({
     addUpComingMovies: (state, action) => {
       state.upComingMovies = action.payload;
     },
+
+    // Separate error reducers for each data type
+    errorStateOfNowPlayingMovies: (state, action) => {
+      state.nowPlayingMoviesError = action.payload;
+    },
+    errorStateOfPopularMovies: (state, action) => {
+      state.popularMoviesError = action.payload;
+    },
+    errorStateOfTopRatedMovies: (state, action) => {
+      state.topRatedMoviesError = action.payload;
+    },
+    errorStateOfUpComingMovies: (state, action) => {
+      state.upComingMoviesError = action.payload;
+    },
+    nowPlayingMovieTrailerError: (state, action) => {
+      state.nowPlayingMovieTrailerError = action.payload;
+    },
+    clearErrorOfMovies: (state) => {
+      state.nowPlayingMoviesError = undefined;
+      state.popularMoviesError = undefined;
+      state.topRatedMoviesError = undefined;
+      state.upComingMoviesError = undefined;
+      state.nowPlayingMovieTrailerError = undefined;
+    },
   },
 });
 export const {
@@ -44,5 +78,11 @@ export const {
   addPopularMovies,
   addtopRatedMovies,
   addUpComingMovies,
+  errorStateOfNowPlayingMovies,
+  errorStateOfPopularMovies,
+  errorStateOfTopRatedMovies,
+  errorStateOfUpComingMovies,
+  nowPlayingMovieTrailerError,
+  clearErrorOfMovies,
 } = movieSlice.actions;
 export default movieSlice.reducer;

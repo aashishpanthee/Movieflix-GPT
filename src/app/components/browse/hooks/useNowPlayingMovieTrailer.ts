@@ -1,23 +1,20 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../redux/store';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../redux/store';
 import { useEffect } from 'react';
 import axiosInstance from '../../../config/axios/axios.config';
 import {
   getNowPlayingMovieTrailer,
   NOW_PLAYING_MOVIE_TRAILER,
 } from '../../../types/movie.types';
-import { addNowPlayingMovieTrailer } from '../../../redux/movies/movieSlice';
+import {
+  addNowPlayingMovieTrailer,
+  clearErrorOfMovies,
+  nowPlayingMovieTrailerError,
+} from '../../../redux/movies/movieSlice';
+import { useQuery } from '@tanstack/react-query';
 
 export const useNowPlayingMovieTrailer = (movieId: number) => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const { nowPlayingMovieTrailer } = useSelector(
-    (store: RootState) => store.movies
-  );
-
-  useEffect(() => {
-    !nowPlayingMovieTrailer && getNowPlayingMovieTrailer();
-  }, [movieId]);
 
   const getNowPlayingMovieTrailer: getNowPlayingMovieTrailer = async () => {
     const nowPlayingMovieDetail = await axiosInstance.get(
@@ -34,7 +31,21 @@ export const useNowPlayingMovieTrailer = (movieId: number) => {
       nowPlayingMovieTrailerResults.length
         ? nowPlayingMovieTrailerResults[0]
         : nowPlayingMovieDetail.data.results[0];
-    dispatch(addNowPlayingMovieTrailer(nowPlayingMovieTrailer));
+    return nowPlayingMovieTrailer;
   };
-  return nowPlayingMovieTrailer;
+
+  const { data, error } = useQuery({
+    queryKey: ['now-playing-movie-trailer', movieId],
+    queryFn: getNowPlayingMovieTrailer,
+    staleTime: 1000 * 60 * 3, // Data is considered fresh for 3 minutes
+  });
+
+  useEffect(() => {
+    if (data) {
+      dispatch(addNowPlayingMovieTrailer(data));
+      dispatch(clearErrorOfMovies());
+    } else {
+      dispatch(nowPlayingMovieTrailerError(error?.message));
+    }
+  }, [movieId, data, error]);
 };
