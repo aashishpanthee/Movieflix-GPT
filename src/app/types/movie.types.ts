@@ -63,6 +63,30 @@ export type UPCOMING_MOVIE_RESPONSE = {
   total_results: number;
 };
 
+export type SearchedMoviesFromTMDBResponse = {
+  page: number;
+  results: SearchedMoviesFromTMDB[];
+  total_pages: number;
+  total_results: number;
+};
+
+export type SearchedMoviesFromTMDB = {
+  adult: boolean;
+  backdrop_path: null | string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: Date;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+};
+
 export type getNowPlayingMovies = () => Promise<void>;
 export type getNowPlayingMovieTrailer = () => Promise<void>;
 export type getPopularMovies = () => Promise<void>;

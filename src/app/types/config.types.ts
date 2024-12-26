@@ -1,6 +1,7 @@
 export type ConfigType = {
   firebasConfig: FirebaseConfigType;
   tmdbApiConfig: TmdbApiConfigType;
+  openAiApiConfig: OpenAiApiConfigType;
 };
 export type FirebaseConfigType = {
   apiKey: string;
@@ -16,4 +17,7 @@ export type TmdbApiConfigType = {
 export type HeaderType = {
   accept: string;
   Authorization: string;
+};
+export type OpenAiApiConfigType = {
+  apiKey: string;
 };

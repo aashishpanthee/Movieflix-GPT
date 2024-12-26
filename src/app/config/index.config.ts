@@ -14,4 +14,7 @@ export const CONFIG: ConfigType = {
       Authorization: `Bearer ${process.env.REACT_APP_TMDB_API_READ_ACCESS_TOKEN}`,
     },
   },
+  openAiApiConfig: {
+    apiKey: process.env.REACT_APP_OPEN_AI_API_KEY ?? '',
+  },
 };
