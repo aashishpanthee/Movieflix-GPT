@@ -37,6 +37,7 @@
 - fetched gptMoviesSuggestions from TMDB
 - memoization in hooks
 - Responsive UI
+- Implemented React-query for sever side calls to fetch movies data
 
 # Features
 
