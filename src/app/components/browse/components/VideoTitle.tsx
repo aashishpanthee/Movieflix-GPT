@@ -7,14 +7,16 @@ type VideoTitleProps = {
 
 const VideoTitle = ({ title, overview }: VideoTitleProps) => {
   return (
-    <div className='absolute w-screen px-24 text-slate-100 pt-[20%] bg-gradient-to-r from-black aspect-video'>
-      <h1 className='text-6xl font-bold'>{title}</h1>
-      <p className='w-1/3 py-6 text-lg text-justify'>{overview}</p>
+    <div className='absolute w-screen md:px-24 px-6 text-slate-100 pt-[20%] bg-gradient-to-r from-black aspect-video'>
+      <h1 className='text-2xl font-bold md:text-6xl'>{title}</h1>
+      <p className='hidden py-6 text-lg text-justify lg:w-1/3 md:w-1/2 lg:inline-block'>
+        {overview}
+      </p>
       <div>
-        <Button className='p-4 px-12 text-xl text-black bg-gray-100 rounded-md hover:bg-opacity-80'>
+        <Button className='px-5 py-2 text-base bg-gray-400 rounded-md md:text-black md:bg-gray-100 lg:text-xl lg:px-12 md:py-4 hover:bg-opacity-80'>
           ▶️ Play
         </Button>
-        <Button className='p-4 px-12 mx-2 text-xl bg-gray-500 bg-opacity-50 rounded-md'>
+        <Button className='hidden mx-2 text-xl bg-gray-500 bg-opacity-50 rounded-md lg:px-12 lg:py-4 lg:inline-block'>
           More Info
         </Button>
       </div>

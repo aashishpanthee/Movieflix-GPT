@@ -6,17 +6,19 @@ type Props = {};
 
 const GptSearch = (props: Props) => {
   return (
-    <div className=''>
-      <div className='fixed w-full -z-10'>
-        <img
-          src={LOGIN_BG}
-          alt='logo'
-          className='object-cover w-full h-screen'
-        />
+    <>
+      <div className=''>
+        <div className='fixed w-full -z-10'>
+          <img
+            src={LOGIN_BG}
+            alt='logo'
+            className='object-cover w-full h-screen'
+          />
+        </div>
+        <GptSearchBar />
+        <GptMovieSuggestion />
       </div>
-      <GptSearchBar />
-      <GptMovieSuggestion />
-    </div>
+    </>
   );
 };
 

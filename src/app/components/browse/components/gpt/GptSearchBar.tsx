@@ -26,12 +26,12 @@ const GptSearchBar = (props: Props) => {
     //   gptResults.choices?.[0].message?.content?.split(',') || [];
 
     const mockGPTRecommendations = [
-      'Godfather',
-      'The Godfather',
-      'The Godfather Part II',
-      'JAZZ GODFATHER',
-      'Tokyo Godfathers',
-      'Miracles: The Canton Godfather',
+      'The Substance',
+      'Substance',
+      "The Substance: Albert Hofmann's LSD",
+      'Substance noire',
+      'Experiments of Colour and Substance',
+      'A Matéria Noturna',
     ];
 
     const PromiseArrayofSearchedMovies = mockGPTRecommendations.map(
@@ -52,19 +52,19 @@ const GptSearchBar = (props: Props) => {
   };
 
   return (
-    <div className='pt-[10%] flex justify-center'>
+    <div className='pt-[40%] md:pt-[10%] flex justify-center px-1 md:px-0'>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className='grid w-1/2 grid-cols-12 bg-black'
+        className='grid w-full grid-cols-12 bg-black md:w-1/2 '
       >
         <input
           type='text'
-          className='col-span-9 p-4 m-4'
+          className='col-span-9 p-2 m-4 md:p-4 placeholder:text-sm md:placeholder:text-base '
           placeholder={GPT_SEARCH_BAR_TEXT[selectedLanguage].searchPlaceholder}
           ref={searchText}
         />
         <Button
-          className='col-span-3 px-4 py-2 m-4 text-white bg-red-700 rounded-md'
+          className='col-span-3 px-2 py-2 m-4 text-sm text-white bg-red-700 rounded-md md:px-4 md:text-base'
           onClick={handleGPTSearchClick}
         >
           {GPT_SEARCH_BAR_TEXT[selectedLanguage].search}

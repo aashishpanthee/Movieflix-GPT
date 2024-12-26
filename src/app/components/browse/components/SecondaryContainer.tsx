@@ -13,7 +13,7 @@ const SecondaryContainer = (props: Props) => {
     return null;
   return (
     <div className='bg-black '>
-      <div className=' z-20 -mt-[10%] relative pl-12'>
+      <div className='mt-0 z-20 md:-mt-[2%] lg:-mt-[10%] relative md:pl-12 pl-2'>
         <MovieList title='Now Playing' movies={nowPlayingMovies} />
         <MovieList title='Upcoming' movies={upComingMovies} />
         <MovieList title='Top Rated' movies={topRatedMovies} />

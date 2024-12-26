@@ -27,7 +27,7 @@ const Login = (props: Props): JSX.Element => {
         />
       </div>
       <form
-        className='absolute left-0 right-0 w-3/12 px-12 py-16 mx-auto text-white bg-black rounded-sm bg-opacity-80 top-1/4'
+        className='absolute left-0 right-0 w-full px-12 py-16 mx-auto text-white bg-black rounded-sm md:w-3/12 bg-opacity-80 md:top-1/4 top-[15%]'
         onSubmit={(e) => e.preventDefault()}
       >
         <h1

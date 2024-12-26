@@ -52,10 +52,10 @@ const Header = (props: Props) => {
     dispatch(changeLanguage(e.target.value));
   };
   return (
-    <div className='absolute z-10 flex items-center justify-between w-full px-8 py-2 bg-gradient-to-b from-black'>
+    <div className='absolute z-10 flex flex-col items-center justify-between w-full px-8 py-2 md:flex-row bg-gradient-to-b from-black'>
       <img className='w-44' src={HEADER_LOGO} alt='logo' />
       {user && (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-4 md:justify-none md:gap-2'>
           {showGptSearch && (
             <select
               className='p-2 m-2 text-white bg-gray-900 outline-none'
@@ -69,7 +69,7 @@ const Header = (props: Props) => {
             </select>
           )}
           <Button
-            className='px-4 py-2 mx-4 my-2 text-white bg-purple-800 rounded-md'
+            className='px-3 py-1 text-sm text-white bg-purple-800 rounded-md md:px-4 md:py-2'
             onClick={handleGptSearchView}
           >
             {showGptSearch
@@ -77,9 +77,13 @@ const Header = (props: Props) => {
               : HeaderComponentText.GPT_PAGE_BUTTON_TEXT}
           </Button>
           <img src={USER_ICON} alt='' className='w-12 h-12' />
-          <p className='text-lg text-white'>{user.displayName}</p>
+
+          <p className='hidden text-sm text-white md:inline-block md:text-lg '>
+            {user.displayName}
+          </p>
+
           <Button
-            className='px-4 py-2 text-white bg-gray-700 rounded-md focus:outline-none'
+            className='px-3 py-1 text-white bg-gray-700 rounded-md md:px-4 md:py-2 focus:outline-none'
             onClick={handleSignOut}
           >
             {HeaderComponentText.LOGOUT_TEXT}
