@@ -12,11 +12,11 @@ import {
 export const usePopularMovies = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(() => {
-    getPopularMovies();
-  }, []);
-
   const { popularMovies } = useSelector((store: RootState) => store.movies);
+
+  useEffect(() => {
+    !popularMovies && getPopularMovies();
+  }, []);
 
   const getPopularMovies: getPopularMovies = async () => {
     const response = await axiosInstance.get<POPULAR_MOVIE_RESPONSE>(

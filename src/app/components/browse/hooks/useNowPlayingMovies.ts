@@ -12,11 +12,11 @@ import {
 export const useNowPlayingMovies = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(() => {
-    getNowPlayingMovies();
-  }, []);
-
   const { nowPlayingMovies } = useSelector((store: RootState) => store.movies);
+
+  useEffect(() => {
+    !nowPlayingMovies && getNowPlayingMovies();
+  }, []);
 
   const getNowPlayingMovies: getNowPlayingMovies = async () => {
     const response = await axiosInstance.get<NOW_PLAYING_MOVIE_RESPONSE>(

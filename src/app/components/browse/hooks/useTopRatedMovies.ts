@@ -12,11 +12,11 @@ import {
 export const useTopRatedMovies = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(() => {
-    getTopRatedMovies();
-  }, []);
-
   const { topRatedMovies } = useSelector((store: RootState) => store.movies);
+
+  useEffect(() => {
+    !topRatedMovies && getTopRatedMovies();
+  }, []);
 
   const getTopRatedMovies: getTopRatedMovies = async () => {
     const response = await axiosInstance.get<TOP_RATED_MOVIE_RESPONSE>(

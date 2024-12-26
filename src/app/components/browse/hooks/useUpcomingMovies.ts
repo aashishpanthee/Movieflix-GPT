@@ -15,11 +15,11 @@ import {
 export const useUpcomingMovies = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(() => {
-    getUpcomingMovies();
-  }, []);
-
   const { upComingMovies } = useSelector((store: RootState) => store.movies);
+
+  useEffect(() => {
+    !upComingMovies && getUpcomingMovies();
+  }, []);
 
   const getUpcomingMovies: getUpcomingMovies = async () => {
     const response = await axiosInstance.get<UPCOMING_MOVIE_RESPONSE>(

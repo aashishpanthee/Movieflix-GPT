@@ -16,7 +16,7 @@ export const useNowPlayingMovieTrailer = (movieId: number) => {
   );
 
   useEffect(() => {
-    getNowPlayingMovieTrailer();
+    !nowPlayingMovieTrailer && getNowPlayingMovieTrailer();
   }, [movieId]);
 
   const getNowPlayingMovieTrailer: getNowPlayingMovieTrailer = async () => {
