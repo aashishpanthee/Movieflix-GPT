@@ -1,8 +1,8 @@
-import { MOVIE } from '../../../types/movie.types';
+import { MOVIE, SearchedMoviesFromTMDB } from '../../../types/movie.types';
 import { IMAGE_BASE_URL } from '../../../utils/constants';
 
 type MovieCardProps = {
-  movie: MOVIE;
+  movie: MOVIE | SearchedMoviesFromTMDB;
 };
 
 const MovieCard = (props: MovieCardProps) => {

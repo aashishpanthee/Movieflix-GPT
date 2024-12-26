@@ -3,12 +3,8 @@ import { GPT_SEARCH_BAR_TEXT } from '../../../../utils/constants';
 import { AppDispatch, RootState } from '../../../../redux/store';
 import Button from '../../../common/Button';
 import { useRef } from 'react';
-import axiosInstance from '../../../../config/axios/axios.config';
-import {
-  SearchedMoviesFromTMDB,
-  SearchedMoviesFromTMDBResponse,
-} from '../../../../types/movie.types';
 import { addGptMovieResult } from '../../../../redux/gpt/gptSlice';
+import { searchMovieTMDB } from '../../../../utils/movies';
 
 type Props = {};
 
@@ -17,16 +13,7 @@ const GptSearchBar = (props: Props) => {
   const searchText = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch<AppDispatch>();
 
-  const searchMovieTMDB = async (movie: string) => {
-    const response = await axiosInstance.get<SearchedMoviesFromTMDBResponse>(
-      `/search/movie?query=${movie}&include_adult=false&page=1`
-    );
-    const searchedMovieTMDBResults: SearchedMoviesFromTMDB[] =
-      response.data.results;
-    return searchedMovieTMDBResults;
-  };
-  searchMovieTMDB('GodFather');
-
+  // ! ISSUE: Open-ai's,  gpt api is not working due to excessive api calls and free quotas for the api call has been finished. so we have used mock movies data for now.
   const handleGPTSearchClick = async () => {
     // const searchedContent = `Act as a Movie Recommendation System and suggest some movies for the query: ${searchText.current?.value} and give me name of 5 movies, comma separated like the example result given ahead. Example Result: Interstellar, Sholay, Don, Koi Mil Gaya, Agastya"`;
     // make api call to opean-ai gpt
@@ -51,9 +38,11 @@ const GptSearchBar = (props: Props) => {
       (movie: string) => searchMovieTMDB(movie)
     );
 
+    // PromiseArrayOfSearchMovies is an array of promises, so we need to use Promise.all to wait for all promises to resolve
     const searchedMoviesFromTMDB = await Promise.all(
       PromiseArrayofSearchedMovies
     );
+
     dispatch(
       addGptMovieResult({
         movieNames: mockGPTRecommendations,

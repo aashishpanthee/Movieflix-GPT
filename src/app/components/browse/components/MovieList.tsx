@@ -1,9 +1,9 @@
-import { MOVIE } from '../../../types/movie.types';
+import { MOVIE, SearchedMoviesFromTMDB } from '../../../types/movie.types';
 import MovieCard from './MovieCard';
 
 type MovieListProps = {
   title: string;
-  movies: MOVIE[] | null;
+  movies: MOVIE[] | SearchedMoviesFromTMDB[] | null;
 };
 
 const MovieList = ({ title, movies }: MovieListProps) => {

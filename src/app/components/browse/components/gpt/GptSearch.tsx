@@ -7,7 +7,7 @@ type Props = {};
 const GptSearch = (props: Props) => {
   return (
     <div className=''>
-      <div className='absolute w-full -z-10'>
+      <div className='fixed w-full -z-10'>
         <img
           src={LOGIN_BG}
           alt='logo'
