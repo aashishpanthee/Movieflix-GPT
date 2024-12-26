@@ -1,5 +1,7 @@
 # MovieFlix GPT
 
+!!! ISSUE: Open-ai's, gpt api is not working due to excessive api calls and free quotas for the api call has been finished. so we have used MOCK MOVIES DATA for now.
+
 - Create React App
 - Configured TailwindCSS
 - Header
@@ -31,6 +33,10 @@
 - GPT Search Page
 - GPT Search Bar
 - Multi-language feature in GPT Search Page
+- Open ai integration
+- fetched gptMoviesSuggestions from TMDB
+- memoization in hooks
+- Responsive UI
 
 # Features
 
